@@ -2,14 +2,20 @@ package com.OrderManagmentSystem.Models;
 
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class Order {
+public  class Order {
+
     private String orderId;
     private List<Product> products;
-    private List<Order> compoundOrders; // For compound orders
     private Customer customer;
+    private final List<Order> subOrders; // For compound orders
+
+    public Order() {
+        this.subOrders = new ArrayList<>();
+    }
 
     public String getOrderId() {
         return orderId;
@@ -27,14 +33,6 @@ public class Order {
         this.products = products;
     }
 
-    public List<Order> getCompoundOrders() {
-        return compoundOrders;
-    }
-
-    public void setCompoundOrders(List<Order> compoundOrders) {
-        this.compoundOrders = compoundOrders;
-    }
-
     public Customer getCustomer() {
         return customer;
     }
@@ -43,5 +41,11 @@ public class Order {
         this.customer = customer;
     }
 
-    // getters and setters
+    public void addSubOrder(Order subOrder) {
+        subOrders.add(subOrder);
+    }
+
+    public List<Order> getSubOrders (){
+        return subOrders;
+    }
 }
