@@ -1,8 +1,6 @@
 package com.OrderManagmentSystem.Controllers;
 
-import com.OrderManagmentSystem.Models.CompoundOrder;
 import com.OrderManagmentSystem.Models.Order;
-import com.OrderManagmentSystem.Models.SimpleOrder;
 import com.OrderManagmentSystem.Services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -41,7 +39,7 @@ public class OrderController {
     }
 
     @PutMapping("/{orderId}")
-    public Order updateOrder(@PathVariable String orderId , @RequestBody SimpleOrder order){
+    public Order updateOrder(@PathVariable String orderId , @RequestBody Order order){
         return orderService.updateOrder(orderId , order);
 
     }

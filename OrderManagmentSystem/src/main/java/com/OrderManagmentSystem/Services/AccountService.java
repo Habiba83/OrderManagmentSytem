@@ -1,6 +1,6 @@
 package com.OrderManagmentSystem.Services;
 
-import com.OrderManagmentSystem.Models.Account;
+import com.OrderManagmentSystem.Models.Customer;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -8,28 +8,28 @@ import java.util.ArrayList;
 @Service
 public class AccountService {
 
-    private final ArrayList<Account> accounts;
+    private final ArrayList<Customer> customers;
 
     public AccountService() {
-        this.accounts = new ArrayList<>();
+        this.customers = new ArrayList<>();
     }
 
-    public boolean addAccount(Account newAccount) {
-        for (Account account : accounts) {
-            if (account.getUserName().equals(newAccount.getUserName())) {
+    public boolean addAccount(Customer newCustomer) {
+        for (Customer customer : customers) {
+            if (customer.getUserName().equals(newCustomer.getUserName())) {
                 return false; // Username already exists
-            } else if (account.getEmail().equals(newAccount.getEmail())) {
+            } else if (customer.getEmail().equals(newCustomer.getEmail())) {
                 return false; // Email already registered
             }
         }
-        accounts.add(newAccount);
+        customers.add(newCustomer);
         return true; // Account created successfully
     }
 
-    public boolean checkUser(Account checkAccount) {
-        for (Account account : accounts) {
-            if (account.getUserName().equals(checkAccount.getUserName())) {
-                return account.getPassword().equals(checkAccount.getPassword());
+    public boolean checkUser(Customer checkCustomer) {
+        for (Customer customer : customers) {
+            if (customer.getUserName().equals(checkCustomer.getUserName())) {
+                return customer.getPassword().equals(checkCustomer.getPassword());
             }
         }
         return false;

@@ -1,6 +1,6 @@
 package com.OrderManagmentSystem.Controllers;
 
-import com.OrderManagmentSystem.Models.Account;
+import com.OrderManagmentSystem.Models.Customer;
 import com.OrderManagmentSystem.Services.AccountService;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,14 +15,14 @@ public class AccountController {
     }
 
     @PostMapping("/create")
-    public String createAccount(@RequestBody Account newAccount) {
-        boolean success = accountService.addAccount(newAccount);
+    public String createAccount(@RequestBody Customer newCustomer) {
+        boolean success = accountService.addAccount(newCustomer);
         return success ? "Account created successfully :)" : "Account creation failed. Username or email already exists.";
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody Account checkAccount) {
-        boolean success = accountService.checkUser(checkAccount);
+    public String login(@RequestBody Customer checkCustomer) {
+        boolean success = accountService.checkUser(checkCustomer);
         return success ? "Logged in successfully :)" : "Login failed. Username or password is incorrect.";
     }
 }
