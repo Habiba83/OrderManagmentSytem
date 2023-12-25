@@ -33,8 +33,8 @@ public class OrderController {
         return orderService.getOrder(orderId);
     }
 
-    @DeleteMapping("/{orderId}")
-    public boolean deleteOrder(@PathVariable String orderId) {
+    @DeleteMapping("/{orderId}/cancel")
+    public boolean cancelOrder(@PathVariable String orderId) {
         return orderService.deleteOrder(orderId);
     }
 
@@ -47,6 +47,12 @@ public class OrderController {
     @PostMapping("/{orderId}/ship")
     public Order shipOrder(@PathVariable String orderId){
         return orderService.shipOrder(orderId);
+    }
+
+    @PostMapping("/{orderId}/ship/cancel")
+    public String cancelShipment(@PathVariable String orderId){
+        return orderService.cancelShipment(orderId);
+
     }
 
 

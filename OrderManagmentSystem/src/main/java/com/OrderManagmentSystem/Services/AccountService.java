@@ -4,6 +4,7 @@ import com.OrderManagmentSystem.Models.Customer;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class AccountService {
@@ -33,5 +34,19 @@ public class AccountService {
             }
         }
         return false;
+    }
+
+    public List<Customer> getAllCustomers() {
+        return customers;
+
+    }
+
+    public Customer getCustomer(String customerId){
+        for (Customer customer : customers){
+            if (customer.getId().equals(customerId)){
+                return customer;
+            }
+        }
+        return null;
     }
 }

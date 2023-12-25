@@ -10,17 +10,15 @@ public class Customer {
     private double balance;
 
 
-
-    public Customer() {
-    }
-
-    public Customer(String userName, String password, String address, String email, double balance) {
+    public Customer(String userName, String password, String address, String email, String id, double balance) {
         this.userName = userName;
         this.password = password;
         this.address = address;
         this.email = email;
+        this.id = id;
         this.balance = balance;
     }
+
     public String getId() {
         return id;
     }
@@ -28,6 +26,7 @@ public class Customer {
     public void setId(String id) {
         this.id = id;
     }
+
     public String getUserName() {
         return userName;
     }
@@ -66,5 +65,18 @@ public class Customer {
 
     public void setBalance(double balance) {
         this.balance = balance;
+    }
+
+    public void deductBalance(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+        } else {
+            // Handle invalid amount
+            throw new RuntimeException("Insufficient balance or invalid amount");
+        }
+    }
+
+    public void addBalance(double shippingFees) {
+        balance += shippingFees;
     }
 }

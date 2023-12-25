@@ -10,8 +10,10 @@ public class OrderService {
 
 
     private final List<Order> orders;
+    private final List<Order> shippingOrders;
 
-    public OrderService() {
+    public OrderService(List<Order> shippingOrders) {
+        this.shippingOrders = new ArrayList<>();
         this.orders = new ArrayList<>();
     }
 
@@ -34,6 +36,9 @@ public class OrderService {
     public List<Order> getAll() {
         return orders;
     }
+    public List<Order> getAllShippingOrders() {
+        return shippingOrders;
+    }
 
     public boolean deleteOrder(String orderId) {
         return orders.removeIf(order -> order.getOrderId().equals(orderId));
@@ -46,10 +51,20 @@ public class OrderService {
     }
 
     public Order shipOrder(String orderId) {
-        System.out.println("shipping the order...");
-        System.out.println("deducting shipping fees...");
+        Order order = getOrder(orderId);
+        order.shipOrder();
+        shippingOrders.add(order);
+        System.out.println("shipping the order..." + orderId);
+        return order;
 
-        return getOrder(orderId);
+    }
+
+    public String cancelShipment(String orderId) {
+        Order order1 = getOrder(orderId);
+        order1.unshipOrder();
+        shippingOrders.removeIf(order -> order.getOrderId().equals(orderId));
+
+        return "cancel shipping the order..."+ orderId;
 
     }
 }

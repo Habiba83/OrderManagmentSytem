@@ -4,6 +4,8 @@ import com.OrderManagmentSystem.Models.Customer;
 import com.OrderManagmentSystem.Services.AccountService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/accounts")
 public class AccountController {
@@ -24,5 +26,14 @@ public class AccountController {
     public String login(@RequestBody Customer checkCustomer) {
         boolean success = accountService.checkUser(checkCustomer);
         return success ? "Logged in successfully :)" : "Login failed. Username or password is incorrect.";
+    }
+
+    @GetMapping("")
+    public List<Customer> getAllCustomers(){
+        return accountService.getAllCustomers();
+    }
+    @GetMapping("/{customerId}")
+    public Customer getAllCustomers(@PathVariable String customerId){
+        return accountService.getCustomer(customerId);
     }
 }
