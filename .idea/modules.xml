@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/OrderManagmentSystem.iml" filepath="$PROJECT_DIR$/.idea/OrderManagmentSystem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OrderManagmentSystem/OrderManagmentSystem.iml" filepath="$PROJECT_DIR$/OrderManagmentSystem/OrderManagmentSystem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/OrderManagmentSytem.iml" filepath="$PROJECT_DIR$/.idea/OrderManagmentSytem.iml" />
     </modules>
   </component>
 </project>
