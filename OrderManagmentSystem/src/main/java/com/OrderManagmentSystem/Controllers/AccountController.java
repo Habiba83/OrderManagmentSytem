@@ -2,6 +2,7 @@ package com.OrderManagmentSystem.Controllers;
 
 import com.OrderManagmentSystem.Models.Customer;
 import com.OrderManagmentSystem.Services.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 @RequestMapping("/accounts")
 public class AccountController {
 
+    @Autowired
     private final AccountService accountService;
 
     public AccountController(AccountService accountService) {
@@ -17,9 +19,9 @@ public class AccountController {
     }
 
     @PostMapping("/create")
-    public String createAccount(@RequestBody Customer newCustomer) {
-        boolean success = accountService.addAccount(newCustomer);
-        return success ? "Account created successfully :)" : "Account creation failed. Username or email already exists.";
+    public Customer createAccount(@RequestBody Customer customer) {
+        System.out.println(customer);
+        return  accountService.addAccount(customer);
     }
 
     @PostMapping("/login")
@@ -33,7 +35,7 @@ public class AccountController {
         return accountService.getAllCustomers();
     }
     @GetMapping("/{customerId}")
-    public Customer getAllCustomers(@PathVariable String customerId){
+    public Customer getSpecificCustomer(@PathVariable String customerId){
         return accountService.getCustomer(customerId);
     }
 }

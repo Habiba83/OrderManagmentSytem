@@ -50,6 +50,14 @@ public class Product {
     public int getCount() {
         return count;
     }
+    public void addCount(int value) {
+        count = count + value;
+    }
+    public void removeCount(int value) {
+        count = count - value;
+    }
+
+
     public void setCount(int count) {
         this.count = count;
     }

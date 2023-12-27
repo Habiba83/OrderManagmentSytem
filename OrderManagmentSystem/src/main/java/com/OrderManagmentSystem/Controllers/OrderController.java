@@ -1,11 +1,9 @@
 package com.OrderManagmentSystem.Controllers;
 
-import com.OrderManagmentSystem.Models.CompoundOrder;
-import com.OrderManagmentSystem.Models.Order;
-import com.OrderManagmentSystem.Models.SimpleOrder;
-import com.OrderManagmentSystem.Services.AccountService;
+import com.OrderManagmentSystem.Models.OrderModels.CompoundOrder;
+import com.OrderManagmentSystem.Models.OrderModels.Order;
+import com.OrderManagmentSystem.Models.OrderModels.SimpleOrder;
 import com.OrderManagmentSystem.Services.OrderService;
-import com.OrderManagmentSystem.Services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +16,7 @@ public class OrderController {
     @Autowired
     private final OrderService orderService;
 
-    public OrderController(OrderService orderService, AccountService customerService, ProductService productService) {
+    public OrderController(OrderService orderService) {
         this.orderService = orderService;
     }
 
@@ -43,7 +41,7 @@ public class OrderController {
     }
 
     @DeleteMapping("/{orderId}")
-    public boolean cancelOrder(@PathVariable String orderId) {
+    public boolean deleteOrder(@PathVariable String orderId) {
         return orderService.deleteOrder(orderId);
     }
 
@@ -58,17 +56,33 @@ public class OrderController {
 
     }
 
+
+
+
     @PostMapping("/{orderId}/ship")
     public Order shipOrder(@PathVariable String orderId){
-        System.out.println(orderId);
+//        System.out.println(orderId);
         return orderService.shipOrder(orderId);
     }
 
-    @PostMapping("/{orderId}/ship/cancel")
-    public String cancelShipment(@PathVariable String orderId){
-        return orderService.cancelShipment(orderId);
-
+    @PostMapping("/{orderId}/unship")
+    public String unshipOrder(@PathVariable String orderId){
+//        System.out.println(orderId);
+        return orderService.unshipOrder(orderId);
     }
+
+//
+//    @PostMapping("compound/{orderId}/ship")
+//    public Order shipCompound(@PathVariable String orderId){
+//        return orderService.shipOrder(orderId);
+//
+//    }
+//
+//    @PostMapping("compound/{orderId}/unship")
+//    public String unshipCompound(@PathVariable String orderId){
+//        return orderService.unshipOrder(orderId);
+//
+//    }
 
 
     }

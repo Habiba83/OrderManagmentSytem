@@ -1,12 +1,14 @@
 package com.OrderManagmentSystem.Services;
 
 import com.OrderManagmentSystem.Models.Customer;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Scope("singleton")
 public class AccountService {
 
     private final ArrayList<Customer> customers;
@@ -15,16 +17,9 @@ public class AccountService {
         this.customers = new ArrayList<>();
     }
 
-    public boolean addAccount(Customer newCustomer) {
-        for (Customer customer : customers) {
-            if (customer.getUserName().equals(newCustomer.getUserName())) {
-                return false; // Username already exists
-            } else if (customer.getEmail().equals(newCustomer.getEmail())) {
-                return false; // Email already registered
-            }
-        }
+    public Customer addAccount(Customer newCustomer) {
         customers.add(newCustomer);
-        return true; // Account created successfully
+        return newCustomer;
     }
 
     public boolean checkUser(Customer checkCustomer) {
