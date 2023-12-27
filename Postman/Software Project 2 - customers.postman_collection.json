@@ -1,0 +1,75 @@
+{
+	"info": {
+		"_postman_id": "b3a24d31-0c83-4b69-a444-f288e5ca7f63",
+		"name": "Software Project 2 - customers",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31102104"
+	},
+	"item": [
+		{
+			"name": "create new customer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"userName\": \"ali\",\n  \"password\": \"password123\",\n  \"address\": \"cairo\",\n  \"email\": \"osama@gmail.com\",\n  \"id\": \"ali123\",\n  \"balance\": 1000.0\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/accounts/create",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"accounts",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all customers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/accounts",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get specific customer",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/accounts/osama123",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"accounts",
+						"osama123"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
