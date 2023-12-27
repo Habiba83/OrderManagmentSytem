@@ -1,20 +1,25 @@
 package com.OrderManagmentSystem.Models;
 
-import java.util.ArrayList;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 public class CompoundOrder extends Order{
-    private final List<Order> subOrders; // For compound orders
+    @JsonProperty("subOrders")
+    private  List<SimpleOrder> subOrders;
+//    private final String orderType = "compoundOrder";
 
     public CompoundOrder() {
-        this.subOrders = new ArrayList<>();
     }
-    public void addSubOrder(Order order){
-        subOrders.add(order);
+
+    public void setSubOrders(List<SimpleOrder> subOrders) {
+        this.subOrders = subOrders;
     }
-    public List<Order> getSubOrders (){
+
+    public List<SimpleOrder> getSubOrders() {
         return subOrders;
     }
+
     private double getMyCost (){
         double cost = 0.0;
         for (Product product : products){
@@ -22,7 +27,6 @@ public class CompoundOrder extends Order{
         }
         return cost+shippingFees;
     }
-
     private String getMyDetails (){
 
         return "CompoundOrder " +

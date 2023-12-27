@@ -19,6 +19,18 @@ public class Customer {
         this.balance = balance;
     }
 
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", address='" + address + '\'' +
+                ", email='" + email + '\'' +
+                ", id='" + id + '\'' +
+                ", balance=" + balance +
+                '}';
+    }
+
     public String getId() {
         return id;
     }

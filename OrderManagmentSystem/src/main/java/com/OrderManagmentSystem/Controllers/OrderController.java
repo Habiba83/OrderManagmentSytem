@@ -1,7 +1,11 @@
 package com.OrderManagmentSystem.Controllers;
 
+import com.OrderManagmentSystem.Models.CompoundOrder;
 import com.OrderManagmentSystem.Models.Order;
+import com.OrderManagmentSystem.Models.SimpleOrder;
+import com.OrderManagmentSystem.Services.AccountService;
 import com.OrderManagmentSystem.Services.OrderService;
+import com.OrderManagmentSystem.Services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +18,7 @@ public class OrderController {
     @Autowired
     private final OrderService orderService;
 
-    public OrderController(OrderService orderService) {
+    public OrderController(OrderService orderService, AccountService customerService, ProductService productService) {
         this.orderService = orderService;
     }
 
@@ -23,8 +27,13 @@ public class OrderController {
         return orderService.getAll();
     }
 
-    @PostMapping("")
-    public Order createOrder(@RequestBody Order order) {
+    @PostMapping("/simple")
+    public Order createOrder(@RequestBody SimpleOrder order) {
+        return orderService.addOrder(order);
+    }
+    @PostMapping("/compound")
+    public Order createCompoundOrder(@RequestBody CompoundOrder order) {
+        System.out.println(order);
         return orderService.addOrder(order);
     }
 
@@ -33,19 +42,25 @@ public class OrderController {
         return orderService.getOrder(orderId);
     }
 
-    @DeleteMapping("/{orderId}/cancel")
+    @DeleteMapping("/{orderId}")
     public boolean cancelOrder(@PathVariable String orderId) {
         return orderService.deleteOrder(orderId);
     }
 
-    @PutMapping("/{orderId}")
-    public Order updateOrder(@PathVariable String orderId , @RequestBody Order order){
+    @PutMapping("/simple/{orderId}")
+    public Order updateOrder(@PathVariable String orderId , @RequestBody SimpleOrder order){
+        return orderService.updateOrder(orderId , order);
+
+    }
+    @PutMapping("/compound/{orderId}")
+    public Order updateOrder(@PathVariable String orderId , @RequestBody CompoundOrder order){
         return orderService.updateOrder(orderId , order);
 
     }
 
     @PostMapping("/{orderId}/ship")
     public Order shipOrder(@PathVariable String orderId){
+        System.out.println(orderId);
         return orderService.shipOrder(orderId);
     }
 

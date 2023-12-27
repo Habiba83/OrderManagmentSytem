@@ -52,6 +52,7 @@ public class OrderService {
 
     public Order shipOrder(String orderId) {
         Order order = getOrder(orderId);
+        System.out.println(order);
         order.shipOrder();
         shippingOrders.add(order);
         System.out.println("shipping the order..." + orderId);

@@ -1,6 +1,7 @@
 package com.OrderManagmentSystem.Models;
 
 public class SimpleOrder extends Order{
+//    private final String orderType = "simpleOrder";
 
     private double calculateCost(){
         double cost = 0.0;
@@ -21,9 +22,12 @@ public class SimpleOrder extends Order{
         }
     }
 
+    public SimpleOrder() {
+    }
+
     @Override
     public void unshipOrder() {
-        if (!isShipped) {
+        if (isShipped) {
             if (customer != null) {
                 customer.addBalance(shippingFees);
             }

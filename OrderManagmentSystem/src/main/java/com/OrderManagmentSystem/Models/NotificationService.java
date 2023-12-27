@@ -1,4 +1,4 @@
-package com.OrderManagmentSystem.Services;
+package com.OrderManagmentSystem.Models;
 
 import com.OrderManagmentSystem.Models.EmailNotification;
 import com.OrderManagmentSystem.Models.NotificationObserver;
