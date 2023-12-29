@@ -1,7 +1,6 @@
 package com.OrderManagmentSystem.Services;
-import com.OrderManagmentSystem.Models.Customer;
+import com.OrderManagmentSystem.Models.*;
 import com.OrderManagmentSystem.Models.OrderModels.SimpleOrder;
-import com.OrderManagmentSystem.Models.Product;
 import com.OrderManagmentSystem.Models.OrderModels.Order;
 import com.OrderManagmentSystem.Models.OrderModels.ProductReq;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,9 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 @Service
 @Scope("singleton")
@@ -18,21 +19,34 @@ public class OrderService {
 
     private final List<Order> orders;
     private final List<Order> shippingOrders;
+    private final Queue<String> ShippedOrdernotificationContents;
+    private final Queue<String> placedOrdernotificationsContent;
+
+
     @Autowired
     private final ProductService productService;
     @Autowired
     private final AccountService accountService;
+
 
     public OrderService(ProductService productService, AccountService accountService) {
         this.orders = new ArrayList<>();
         this.shippingOrders = new ArrayList<>();
         this.productService = productService;
         this.accountService = accountService;
+        this.ShippedOrdernotificationContents=new LinkedList<>();
+        this.placedOrdernotificationsContent=new LinkedList<>();
+
     }
 
 
     public Order addOrder(Order order){
         orders.add(order);
+        AbstractNotificationChannel notification=new EmailChannel();
+        //AbstractNotificationChannel notification=new SmsChannel(); if i want to used another channel
+        notification.setOrder(order);
+        String content = notification.createPlacedContent();
+        placedOrdernotificationsContent.add(content);
         return order;
     }
 
@@ -119,6 +133,10 @@ public class OrderService {
             shippingOrders.add(order);
             System.out.println("Shipping the order..." + orderId);
         }
+        AbstractNotificationChannel notification=new EmailChannel();
+        notification.setOrder(order);
+        String content = notification.createPlacedContent();
+        ShippedOrdernotificationContents.add(content);
 
         return order;
     }
