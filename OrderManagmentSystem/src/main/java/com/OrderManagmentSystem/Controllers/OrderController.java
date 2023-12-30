@@ -26,11 +26,11 @@ public class OrderController {
     }
 
     @PostMapping("/simple")
-    public Order createOrder(@RequestBody SimpleOrder order) {
+    public String createOrder(@RequestBody SimpleOrder order) {
         return orderService.addOrder(order);
     }
     @PostMapping("/compound")
-    public Order createCompoundOrder(@RequestBody CompoundOrder order) {
+    public String  createCompoundOrder(@RequestBody CompoundOrder order) {
         System.out.println(order);
         return orderService.addOrder(order);
     }
@@ -60,7 +60,7 @@ public class OrderController {
 
 
     @PostMapping("/{orderId}/ship")
-    public Order shipOrder(@PathVariable String orderId){
+    public String  shipOrder(@PathVariable String orderId){
 //        System.out.println(orderId);
         return orderService.shipOrder(orderId);
     }
