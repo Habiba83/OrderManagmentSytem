@@ -40,14 +40,15 @@ public class OrderService {
     }
 
 
-    public Order addOrder(Order order){
+    public String addOrder(Order order){
         orders.add(order);
         AbstractNotificationChannel notification=new EmailChannel();
-        //AbstractNotificationChannel notification=new SmsChannel(); if i want to used another channel
+        //AbstractNotificationChannel notification=new SmsChannel(); if i want to use another channel
         notification.setOrder(order);
         String content = notification.createPlacedContent();
         placedOrdernotificationsContent.add(content);
-        return order;
+        return content;
+
     }
 
     public Order getOrder(String orderId) {
@@ -118,7 +119,7 @@ public class OrderService {
     // =================================================
     // the main functions for the shipping logic
     // =================================================
-    public Order shipOrder(String orderId) {
+    public String  shipOrder(String orderId) {
 
         Order order = getOrder(orderId);
         if (order != null && !order.isShipped()) {
@@ -138,7 +139,7 @@ public class OrderService {
         String content = notification.createPlacedContent();
         ShippedOrdernotificationContents.add(content);
 
-        return order;
+        return content;
     }
 
     public String unshipOrder(String orderId) {
