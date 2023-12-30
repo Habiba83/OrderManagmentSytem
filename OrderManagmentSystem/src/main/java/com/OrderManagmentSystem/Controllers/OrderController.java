@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Queue;
 
 @RestController
 @RequestMapping("/orders")
@@ -42,7 +43,7 @@ public class OrderController {
 
     @DeleteMapping("/{orderId}")
     public boolean deleteOrder(@PathVariable String orderId) {
-        return orderService.deleteOrder(orderId);
+        return orderService.cancelOrder(orderId);
     }
 
     @PutMapping("/simple/{orderId}")
@@ -83,11 +84,14 @@ public class OrderController {
 //        return orderService.unshipOrder(orderId);
 //
 //    }
-
-
+    @GetMapping("/shippingnotifications")
+    public Queue<String> getAllShippingNotifications(){
+        return orderService.getAllShippingNotifications();
+    }
+    @GetMapping("/placednotifications")
+    public Queue<String>getAllPlacingNotifications(){
+        return orderService.getAllPlacingNotifications();
     }
 
 
-
-
-
+}
